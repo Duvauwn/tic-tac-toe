@@ -1,0 +1,16 @@
+#grid {
+    background-color: aqua;
+    display:flex;
+    box-sizing: border-box;
+    width:100vw;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+#grid div {
+    width:33vw;
+    height:33vw;
+    text-align: center;
+    border:1px solid black;
+
+}
