@@ -19,16 +19,25 @@ const Gameboard = () => {
 const Player = () => {
 
 }
+let grids = document.querySelectorAll('.box');
+grids.forEach(button => {
+    button.addEventListener('click', function () {
+        console.log(button)
+    })
+})
+
+
 //There should be an object to control the flow of the game itself
 
 //Creation of the gameboard. Possibly to be put into Gameboard() object
 const cells = (() => {
     let grid = document.querySelector('#grid');
     for (let i = 0; i < 9; i++) {
-        let content = document.createElement('div');
+        let content = document.createElement('button');
+        content.classList.add('box')
         content.classList.add(i);
         const testing = Object.values(Gameboard());
-        const test2 = JSON.stringify(testing[0][i][i]);
+        const test2 = testing[0][i][i];
         content.textContent = test2
         grid.appendChild(content);
     };

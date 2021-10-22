@@ -1,16 +1,33 @@
+body {
+    font-family: monospace;
+}
 #grid {
     background-color: aqua;
     display:flex;
     box-sizing: border-box;
     width:100vw;
     flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    row-gap: 25px;;
+    padding:0;
+}
+#grid button {
+    width:30vw;
+    height:30vw;display: flex;
     justify-content: center;
     align-items: center;
-}
-#grid div {
-    width:33vw;
-    height:33vw;
-    text-align: center;
-    border:1px solid black;
+    background-color: burlywood;
+    font-size: 10vh;
+    border:none;
 
+}
+#players {
+    display:flex;
+    justify-content: space-around;
+    text-align: center;
+}
+.clicked {
+    background-color: rgb(175, 140, 94);
 }
