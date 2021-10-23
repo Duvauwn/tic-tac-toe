@@ -19,13 +19,8 @@ const Gameboard = () => {
 const Player = () => {
 
 }
-let grids = document.querySelectorAll('.box');
-grids.forEach(button => {
-    button.addEventListener('click', function () {
-        console.log(button)
-    })
-})
-
+let box = document.querySelectorAll('div');
+console.log(box)
 
 //There should be an object to control the flow of the game itself
 
