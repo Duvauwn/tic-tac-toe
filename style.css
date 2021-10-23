@@ -1,8 +1,9 @@
 body {
     font-family: monospace;
+    background-color: rgb(189, 114, 29);
 }
 #grid {
-    background-color: aqua;
+    background-color: rgb(0, 37, 78);
     display:flex;
     box-sizing: border-box;
     width:100vw;
@@ -18,21 +19,21 @@ body {
     justify-content: space-between;
     width:100vw;
 }
-#grid button {
+button {
     width:30vw;
     height:30vw;display: flex;
+    background-color: rgb(147, 137, 204);
     justify-content: center;
     align-items: center;
-    background-color: burlywood;
     font-size: 10vh;
     border:none;
-
+    transition:all 0.7s;
 }
 #players {
     display:flex;
     justify-content: space-around;
     text-align: center;
 }
-.clicked {
-    background-color: rgb(175, 140, 94);
+#clicked {
+    background-color: rgb(54, 37, 155);
 }

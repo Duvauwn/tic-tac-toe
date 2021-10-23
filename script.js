@@ -16,26 +16,42 @@ const Gameboard = () => {
 }
 
 //The players will also be stored inside objects
+let u = 0;
 const Player = () => {
-    let u = 0;
-    let turn = () => {
-        u++
-        let move;
-        if (u % 2 == 0) {
-            move = 'X';
-            return move;
-        }
-        else if (u % 2 != 0) {
-            move = 'O';
-            return move;
-        }
-    }
-    return turn;
 
+    let turn = () => {
+
+        let move = 'test';
+
+        let boxes = document.querySelectorAll('button');
+        boxes.forEach((button) => {
+            button.addEventListener('click', function () {
+                console.log(u);
+
+            });
+            if (u % 2 == 0) {
+                move = 'Xs';
+                return move;
+            }
+            else if (u % 2 != 0) {
+                move = 'Os';
+                return move;
+            } else {
+                move = 'fail';
+                return move;
+            }
+        });
+        u++;
+        return move;
+
+    }
+    return turn();
 }
 
 
 //There should be an object to control the flow of the game itself
+
+
 
 //Creation of the gameboard. Possibly to be put into Gameboard() object
 const cells = (() => {
@@ -56,6 +72,7 @@ const cells = (() => {
 let box = document.querySelectorAll('button');
 box.forEach((button) => {
     button.addEventListener('click', function () {
-        button.textContent = 'X';
+        button.textContent = Player();
+        button.setAttribute('id', 'clicked');
     })
 })
