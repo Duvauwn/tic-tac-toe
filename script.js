@@ -1,18 +1,21 @@
 //The Gameboard will be stored as an array inside of a Gameboard object
 const Gameboard = () => {
-    let board = [
-        //Values for each part of the board currently manually input for setup
+    let board1 = [
         { 0: null },
         { 1: null },
         { 2: null },
-        { 3: null },
-        { 4: null },
-        { 5: null },
-        { 6: null },
-        { 7: null },
-        { 8: null },
     ];
-    return { board };
+    let board2 = [
+        { 0: null },
+        { 1: null },
+        { 2: null },
+    ];
+    let board3 = [
+        { 0: null },
+        { 1: null },
+        { 2: null },
+    ];
+    return { board1, board2, board3 };
 }
 
 //The players will also be stored inside objects
@@ -59,11 +62,10 @@ const cells = (() => {
     grid.forEach(div => {
         for (let i = 0; i < 3; i++) {
             let content = document.createElement('button');
-            content.classList.add('box');
             content.classList.add(i)
-            const testing = Object.values(Gameboard());
-            const test2 = testing[0][i][i];
-            content.textContent = test2
+            const boards = Object.values(Gameboard());
+            const boards2 = boards[i][i][i];
+            content.textContent = boards2
             div.appendChild(content);
         };
     })
@@ -71,8 +73,13 @@ const cells = (() => {
 })();
 let box = document.querySelectorAll('button');
 box.forEach((button) => {
+    let boards = Object.values(Gameboard());
+
+
     button.addEventListener('click', function () {
         button.textContent = Player();
         button.setAttribute('id', 'clicked');
+        boards[button.className][button.className] = boards.className;
+        console.log('Class: ' + button.className);
     })
 })
