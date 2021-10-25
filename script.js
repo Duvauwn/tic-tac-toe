@@ -6,14 +6,14 @@ const Gameboard = () => {
         2: '3',
     };
     let board1 = {
-        0: '4',
-        1: '5',
-        2: '6',
+        a0: '4',
+        a1: '5',
+        a2: '6',
     };
     let board2 = {
-        0: '7',
-        1: '8',
-        2: '9',
+        b0: '7',
+        b1: '8',
+        b2: '9',
     };
     return { board0, board1, board2 };
 }
@@ -55,7 +55,6 @@ const Player = () => {
 //There should be an object to control the flow of the game itself
 
 
-
 //Creation of the gameboard. Possibly to be put into Gameboard() object
 const cells = (() => {
     let grid = document.querySelectorAll('.grid-row');
@@ -65,9 +64,18 @@ const cells = (() => {
             content.classList.add(i);
 
             const boards = Object.values(Gameboard());
-            const boards2 = boards[i][i - 1 || i];
+            if (grid.className = 'a') {
+                if (content.className == 0) {
+                    content.textContent = boards[0][0];
+                }
+                else if (content.className == 1) {
+                    content.textContent = boards[1][1];
+                }
+                else if (content.className == 2) {
+                    content.textContent = boards[2][2];
+                }
+            }
 
-            content.textContent = boards2
             div.appendChild(content);
         };
     })
