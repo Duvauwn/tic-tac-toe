@@ -1,21 +1,21 @@
 //The Gameboard will be stored as an array inside of a Gameboard object
 const Gameboard = () => {
-    let board1 = [
-        { 0: null },
-        { 1: null },
-        { 2: null },
-    ];
-    let board2 = [
-        { 0: null },
-        { 1: null },
-        { 2: null },
-    ];
-    let board3 = [
-        { 0: null },
-        { 1: null },
-        { 2: null },
-    ];
-    return { board1, board2, board3 };
+    let board0 = {
+        0: '1',
+        1: '2',
+        2: '3',
+    };
+    let board1 = {
+        0: '4',
+        1: '5',
+        2: '6',
+    };
+    let board2 = {
+        0: '7',
+        1: '8',
+        2: '9',
+    };
+    return { board0, board1, board2 };
 }
 
 //The players will also be stored inside objects
@@ -29,15 +29,15 @@ const Player = () => {
         let boxes = document.querySelectorAll('button');
         boxes.forEach((button) => {
             button.addEventListener('click', function () {
-                console.log(u);
+                console.log('counter: ' + u);
 
             });
             if (u % 2 == 0) {
-                move = 'Xs';
+                move = 'X';
                 return move;
             }
             else if (u % 2 != 0) {
-                move = 'Os';
+                move = 'O';
                 return move;
             } else {
                 move = 'fail';
@@ -62,9 +62,11 @@ const cells = (() => {
     grid.forEach(div => {
         for (let i = 0; i < 3; i++) {
             let content = document.createElement('button');
-            content.classList.add(i)
+            content.classList.add(i);
+
             const boards = Object.values(Gameboard());
-            const boards2 = boards[i][i][i];
+            const boards2 = boards[i][i - 1 || i];
+
             content.textContent = boards2
             div.appendChild(content);
         };
@@ -79,7 +81,10 @@ box.forEach((button) => {
     button.addEventListener('click', function () {
         button.textContent = Player();
         button.setAttribute('id', 'clicked');
-        boards[button.className][button.className] = boards.className;
-        console.log('Class: ' + button.className);
+
+        Gameboard()['board' + button.className][button.className] = 'testing';
+        console.log('Array: ' + Gameboard()['board' + button.className][button.className])
+
+        button.disabled = true;
     })
 })
