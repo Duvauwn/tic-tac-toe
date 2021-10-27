@@ -53,6 +53,35 @@ const Gameboard = (() => {
 
     return { board0, board1, board2, cells };
 })();
+const Win = (() => {
+    let buttons = document.querySelectorAll('button');
+    buttons.forEach(button => {
+        button.addEventListener('click', function () {
+            for (let i = 0; i < 3; i++) {
+                if (Gameboard['board' + i][0] === Gameboard['board' + i][1] &&
+                    Gameboard['board' + i][0] === Gameboard['board' + i][2]) {
+                    let winner = 'Congratulations Player';
+                    return alert(winner);
+                }
+                else if (Gameboard['board' + 0][i] === Gameboard['board' + 1][i] &&
+                    Gameboard['board' + 0][i] === Gameboard['board' + 2][i]) {
+                    let winner = 'Congrats buddy';
+                    return alert(winner);
+                }
+                else if ((Gameboard['board' + 0][0]) == Gameboard['board' + 1][1] &&
+                    (Gameboard['board' + 2][2]) == Gameboard['board' + 1][1]) {
+                    let winner = 'Nice one boss';
+                    return alert(winner);
+                }
+                else if (Gameboard['board' + 0][2] == Gameboard['board' + 1][1] &&
+                    Gameboard['board' + 2][0] == Gameboard['board' + 1][1]) {
+                    let winner = 'Nice going';
+                    return alert(winner);
+                }
+            }
+        })
+    })
+})();
 //The players will also be stored inside objects
 let u = 0;
 const Player = () => {
