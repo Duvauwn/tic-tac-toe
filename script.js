@@ -1,8 +1,8 @@
 //The Gameboard will be stored as an array inside of a Gameboard object
 const Gameboard = (() => {
-    let board0 = { 0: null, 1: null, 2: null, };
-    let board1 = { 0: null, 1: null, 2: null, };
-    let board2 = { 0: null, 1: null, 2: null, };
+    let board0 = { 0: '', 1: '', 2: '', };
+    let board1 = { 0: '', 1: '', 2: '', };
+    let board2 = { 0: '', 1: '', 2: '', };
 
     //Creation of the gameboard.
     const cells = (() => {
@@ -11,6 +11,7 @@ const Gameboard = (() => {
             for (let i = 0; i < 3; i++) {
                 let content = document.createElement('button');
                 content.classList.add(i);
+                content.classList.add('content');
                 const boards = [board0, board1, board2];
                 if (div.className == 'grid-row a') {
                     if (content.className == 0) {
@@ -62,7 +63,7 @@ const Player = () => {
 
         let move;
 
-        let boxes = document.querySelectorAll('button');
+        let boxes = document.querySelectorAll('.content');
         boxes.forEach((button) => {
             if (u % 2 == 0) {
                 move = 'X';
@@ -84,45 +85,47 @@ const Player = () => {
 }
 
 //Updates the board object according to player input
-let box = document.querySelectorAll('button');
+let box = document.querySelectorAll('.content');
 box.forEach((button) => {
     let gridA = document.querySelector('.a');
     let gridB = document.querySelector('.b');
     let gridC = document.querySelector('.c');
+
     button.addEventListener('click', function () {
         button.textContent = Player();
         button.setAttribute('id', 'clicked');
 
         if (button.parentElement == gridA) {
-            if (button.className == 0) {
+            console.log(button.classList[0]);
+            if (button.classList[0] == 0) {
                 Gameboard.board0[0] = button.textContent;
             }
-            else if (button.className == 1) {
+            else if (button.classList[0] == 1) {
                 Gameboard.board0[1] = button.textContent;
             }
-            else if (button.className == 2) {
+            else if (button.classList[0] == 2) {
                 Gameboard.board0[2] = button.textContent;
             }
         }
         else if (button.parentElement == gridB) {
-            if (button.className == 0) {
+            if (button.classList[0] == 0) {
                 Gameboard.board1[0] = button.textContent;
             }
-            else if (button.className == 1) {
+            else if (button.classList[0] == 1) {
                 Gameboard.board1[1] = button.textContent;
             }
-            else if (button.className == 2) {
+            else if (button.classList[0] == 2) {
                 Gameboard.board1[2] = button.textContent;
             }
         }
         else if (button.parentElement == gridC) {
-            if (button.className == 0) {
+            if (button.classList[0] == 0) {
                 Gameboard.board2[0] = button.textContent;
             }
-            else if (button.className == 1) {
+            else if (button.classList[0] == 1) {
                 Gameboard.board2[1] = button.textContent;
             }
-            else if (button.className == 2) {
+            else if (button.classList[0] == 2) {
                 Gameboard.board2[2] = button.textContent;
             }
         }
@@ -132,7 +135,7 @@ box.forEach((button) => {
 
 //function checks on every click whether the game is finished
 const Win = (() => {
-    let buttons = document.querySelectorAll('button');
+    let buttons = document.querySelectorAll('.content');
     buttons.forEach(button => {
         button.addEventListener('click', function () {
             let arr0 = Object.values(Gameboard.board0);
@@ -143,25 +146,26 @@ const Win = (() => {
             for (let i = 0; i < 3; i++) {
                 if (Gameboard['board' + i][0] === Gameboard['board' + i][1] &&
                     Gameboard['board' + i][0] === Gameboard['board' + i][2] &&
-                    Gameboard['board' + i][0] != null) {
-                    let winner = 'Congratulations Player';
+                    Gameboard['board' + i][0] != '') {
+                    let winner = 'Congratulations Player ' + button.textContent;
+                    buttons.disabled = true;
                     return alert(winner);
                 }
                 else if (Gameboard['board' + 0][i] === Gameboard['board' + 1][i] &&
                     Gameboard['board' + 0][i] === Gameboard['board' + 2][i] &&
-                    Gameboard['board' + 0][i] != null) {
+                    Gameboard['board' + 0][i] != '') {
                     let winner = 'Congrats buddy';
                     return alert(winner);
                 }
                 else if ((Gameboard['board' + 0][0]) == Gameboard['board' + 1][1] &&
                     (Gameboard['board' + 2][2]) == Gameboard['board' + 1][1] &&
-                    Gameboard['board' + 0][0] != null) {
+                    Gameboard['board' + 0][0] != '') {
                     let winner = 'Nice one boss';
                     return alert(winner);
                 }
                 else if (Gameboard['board' + 0][2] == Gameboard['board' + 1][1] &&
                     Gameboard['board' + 2][0] == Gameboard['board' + 1][1] &&
-                    Gameboard['board' + 0][2] != null) {
+                    Gameboard['board' + 0][2] != '') {
                     let winner = 'Nice going';
                     return alert(winner);
                 }
@@ -170,6 +174,21 @@ const Win = (() => {
                     let tied = 'Play Again'
                     return alert(tied);
                 }
+            }
+        })
+    })
+})();
+const Reset = (() => {
+    let redo = document.querySelector('#reset');
+    redo.addEventListener('click', function () {
+        let boxed = document.querySelectorAll('.content');
+        boxed.forEach(boxer => {
+            boxer.textContent = '';
+            boxer.disabled = false;
+            for (let i = 0; i < 3; i++) {
+                Gameboard.board0[i] = boxer.textContent;
+                Gameboard.board1[i] = boxer.textContent;
+                Gameboard.board2[i] = boxer.textContent;
             }
         })
     })
