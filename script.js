@@ -147,26 +147,25 @@ const Win = (() => {
                 if (Gameboard['board' + i][0] === Gameboard['board' + i][1] &&
                     Gameboard['board' + i][0] === Gameboard['board' + i][2] &&
                     Gameboard['board' + i][0] != '') {
-                    let winner = 'Congratulations Player ' + button.textContent;
-                    buttons.disabled = true;
+                    let winner = 'Player ' + button.textContent + ' Wins!';
                     return alert(winner);
                 }
                 else if (Gameboard['board' + 0][i] === Gameboard['board' + 1][i] &&
                     Gameboard['board' + 0][i] === Gameboard['board' + 2][i] &&
                     Gameboard['board' + 0][i] != '') {
-                    let winner = 'Congrats buddy';
+                    let winner = 'Player ' + button.textContent + ' Wins!';
                     return alert(winner);
                 }
                 else if ((Gameboard['board' + 0][0]) == Gameboard['board' + 1][1] &&
                     (Gameboard['board' + 2][2]) == Gameboard['board' + 1][1] &&
                     Gameboard['board' + 0][0] != '') {
-                    let winner = 'Nice one boss';
+                    let winner = 'Player ' + button.textContent + ' Wins!';
                     return alert(winner);
                 }
                 else if (Gameboard['board' + 0][2] == Gameboard['board' + 1][1] &&
                     Gameboard['board' + 2][0] == Gameboard['board' + 1][1] &&
                     Gameboard['board' + 0][2] != '') {
-                    let winner = 'Nice going';
+                    let winner = 'Player ' + button.textContent + ' Wins!';
                     return alert(winner);
                 }
                 else if (arr0.every(testing) == true && arr1.every(testing) == true &&
@@ -178,6 +177,22 @@ const Win = (() => {
         })
     })
 })();
+
+const names = (() => {
+    let playerX = document.querySelector('#name-X');
+    playerX.addEventListener('click', function () {
+        let nameX = prompt('Enter your name', 'Enter your name');
+        let head1 = document.querySelector('#player1');
+        head1.textContent = nameX;
+    })
+    let playerO = document.querySelector('#name-O');
+    playerO.addEventListener('click', function () {
+        let nameO = prompt('Enter your name', 'Enter your name');
+        let head2 = document.querySelector('#player2');
+        head2.textContent = nameO;
+    })
+})();
+
 const Reset = (() => {
     let redo = document.querySelector('#reset');
     redo.addEventListener('click', function () {
