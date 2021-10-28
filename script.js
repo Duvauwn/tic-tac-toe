@@ -1,10 +1,10 @@
 //The Gameboard will be stored as an array inside of a Gameboard object
 const Gameboard = (() => {
-    let board0 = { 0: '1', 1: '2', 2: '3', };
-    let board1 = { 0: '4', 1: '5', 2: '6', };
-    let board2 = { 0: '7', 1: '8', 2: '9', };
+    let board0 = { 0: null, 1: null, 2: null, };
+    let board1 = { 0: null, 1: null, 2: null, };
+    let board2 = { 0: null, 1: null, 2: null, };
 
-    //Creation of the gameboard. Possibly to be put into Gameboard() object
+    //Creation of the gameboard.
     const cells = (() => {
         let grid = document.querySelectorAll('.grid-row');
         grid.forEach(div => {
@@ -53,35 +53,7 @@ const Gameboard = (() => {
 
     return { board0, board1, board2, cells };
 })();
-const Win = (() => {
-    let buttons = document.querySelectorAll('button');
-    buttons.forEach(button => {
-        button.addEventListener('click', function () {
-            for (let i = 0; i < 3; i++) {
-                if (Gameboard['board' + i][0] === Gameboard['board' + i][1] &&
-                    Gameboard['board' + i][0] === Gameboard['board' + i][2]) {
-                    let winner = 'Congratulations Player';
-                    return alert(winner);
-                }
-                else if (Gameboard['board' + 0][i] === Gameboard['board' + 1][i] &&
-                    Gameboard['board' + 0][i] === Gameboard['board' + 2][i]) {
-                    let winner = 'Congrats buddy';
-                    return alert(winner);
-                }
-                else if ((Gameboard['board' + 0][0]) == Gameboard['board' + 1][1] &&
-                    (Gameboard['board' + 2][2]) == Gameboard['board' + 1][1]) {
-                    let winner = 'Nice one boss';
-                    return alert(winner);
-                }
-                else if (Gameboard['board' + 0][2] == Gameboard['board' + 1][1] &&
-                    Gameboard['board' + 2][0] == Gameboard['board' + 1][1]) {
-                    let winner = 'Nice going';
-                    return alert(winner);
-                }
-            }
-        })
-    })
-})();
+
 //The players will also be stored inside objects
 let u = 0;
 const Player = () => {
@@ -111,11 +83,7 @@ const Player = () => {
     return turn();
 }
 
-
-//There should be an object to control the flow of the game itself
-
-
-
+//Updates the board object according to player input
 let box = document.querySelectorAll('button');
 box.forEach((button) => {
     let gridA = document.querySelector('.a');
@@ -161,3 +129,48 @@ box.forEach((button) => {
         button.disabled = true;
     })
 })
+
+//function checks on every click whether the game is finished
+const Win = (() => {
+    let buttons = document.querySelectorAll('button');
+    buttons.forEach(button => {
+        button.addEventListener('click', function () {
+            let arr0 = Object.values(Gameboard.board0);
+            let arr1 = Object.values(Gameboard.board1);
+            let arr2 = Object.values(Gameboard.board2);
+            let testing = x => x == 'X' || x == 'O';
+            console.log(arr0.every(testing), arr1.every(testing), arr2.every(testing));
+            for (let i = 0; i < 3; i++) {
+                if (Gameboard['board' + i][0] === Gameboard['board' + i][1] &&
+                    Gameboard['board' + i][0] === Gameboard['board' + i][2] &&
+                    Gameboard['board' + i][0] != null) {
+                    let winner = 'Congratulations Player';
+                    return alert(winner);
+                }
+                else if (Gameboard['board' + 0][i] === Gameboard['board' + 1][i] &&
+                    Gameboard['board' + 0][i] === Gameboard['board' + 2][i] &&
+                    Gameboard['board' + 0][i] != null) {
+                    let winner = 'Congrats buddy';
+                    return alert(winner);
+                }
+                else if ((Gameboard['board' + 0][0]) == Gameboard['board' + 1][1] &&
+                    (Gameboard['board' + 2][2]) == Gameboard['board' + 1][1] &&
+                    Gameboard['board' + 0][0] != null) {
+                    let winner = 'Nice one boss';
+                    return alert(winner);
+                }
+                else if (Gameboard['board' + 0][2] == Gameboard['board' + 1][1] &&
+                    Gameboard['board' + 2][0] == Gameboard['board' + 1][1] &&
+                    Gameboard['board' + 0][2] != null) {
+                    let winner = 'Nice going';
+                    return alert(winner);
+                }
+                else if (arr0.every(testing) == true && arr1.every(testing) == true &&
+                    arr2.every(testing) == true) {
+                    let tied = 'Play Again'
+                    return alert(tied);
+                }
+            }
+        })
+    })
+})();
