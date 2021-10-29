@@ -11,12 +11,40 @@ html{
 #heading {
     display:flex;
 }
+#choice {
+    display: flex;
+    gap:10px;
+}
 h1 {
     text-align: center;
     font-size: 30px;
     font-style: italic;
-    margin-left: auto;
+    margin-left: auto;;
     margin-right: auto;
+}
+#pvp {
+    margin-right:0px;
+    height: fit-content;
+    align-self: center;
+    background-color: #303179;
+    color: #fae5df;
+    padding:10px;
+    border-radius: 20%;
+    font-style: italic;
+    border-style: none;
+    border-color: #f5cac2;
+}
+#computer {
+    margin-right:0px;
+    height: fit-content;
+    align-self: center;
+    background-color: #303179;
+    color: #fae5df;
+    padding:10px;
+    border-radius: 20%;
+    font-style: italic;
+    border-style: none;
+    border-color: #f5cac2;
 }
 #reset {
     margin-right:0px;

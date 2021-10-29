@@ -13,7 +13,7 @@ const Gameboard = (() => {
                 content.classList.add(i);
                 content.classList.add('content');
                 const boards = [board0, board1, board2];
-                if (div.className == 'grid-row a') {
+                if (div.id == 'grid0') {
                     if (content.className == 0) {
                         content.textContent = boards[0][0];
                     }
@@ -24,7 +24,7 @@ const Gameboard = (() => {
                         content.textContent = boards[0][2];
                     }
                 }
-                else if (div.className == 'grid-row b') {
+                else if (div.id == 'grid1') {
                     if (content.className == 0) {
                         content.textContent = boards[1][0];
                     }
@@ -35,7 +35,7 @@ const Gameboard = (() => {
                         content.textContent = boards[1][2];
                     }
                 }
-                else if (div.className == 'grid-row c') {
+                else if (div.id == 'grid2') {
                     if (content.className == 0) {
                         content.textContent = boards[2][0];
                     }
@@ -55,6 +55,17 @@ const Gameboard = (() => {
     return { board0, board1, board2, cells };
 })();
 
+const Computer = (() => {
+    let comp = document.querySelector('#computer');
+    let compPlay = false;
+    comp.addEventListener('click', function () {
+        Computer.compPlay = true;
+        console.log('click', compPlay);
+    })
+    let compTurn = () => { return Math.floor((Math.random() * 30) / 10); }
+    return { comp, compPlay, compTurn };
+})();
+
 //The players will also be stored inside objects
 let u = 0;
 const Player = () => {
@@ -64,19 +75,54 @@ const Player = () => {
         let move;
 
         let boxes = document.querySelectorAll('.content');
-        boxes.forEach((button) => {
-            if (u % 2 == 0) {
-                move = 'X';
-                return move;
-            }
-            else if (u % 2 != 0) {
+        if (Computer.compPlay == true) {
+            boxes.forEach((button) => {
+                if (u % 2 == 0) {
+                    move = 'X';
+                    return move;
+                }
+
+
+            });
+
+            if (u % 2 != 0) {
+
                 move = 'O';
-                return move;
-            } else {
-                move = 'fail';
+
+                let ones = Computer.compTurn();
+                let twos = Computer.compTurn();
+
+                let choice0 = document.querySelector('#grid' + ones);
+                let choice1 = choice0.children[twos];
+
+                choice1.textContent = move;
+                Gameboard['board' + ones][twos] = choice0.children[twos].textContent;
+                choice1.disabled = true;
+                choice1.setAttribute('id', 'clicked');
+
                 return move;
             }
-        });
+        }
+        else {
+            boxes.forEach((button) => {
+
+
+                if (u % 2 == 0) {
+                    move = 'X';
+                    return move;
+                }
+                else if (u % 2 != 0) {
+                    move = 'O';
+                    return move;
+                } else {
+                    move = 'fail';
+                    return move;
+                }
+
+
+            });
+        }
+
         u++;
         return move;
 
@@ -87,16 +133,18 @@ const Player = () => {
 //Updates the board object according to player input
 let box = document.querySelectorAll('.content');
 box.forEach((button) => {
-    let gridA = document.querySelector('.a');
-    let gridB = document.querySelector('.b');
-    let gridC = document.querySelector('.c');
+    let gridA = document.querySelector('#grid0');
+    let gridB = document.querySelector('#grid1');
+    let gridC = document.querySelector('#grid2');
 
     button.addEventListener('click', function () {
+
         button.textContent = Player();
+
         button.setAttribute('id', 'clicked');
 
+
         if (button.parentElement == gridA) {
-            console.log(button.classList[0]);
             if (button.classList[0] == 0) {
                 Gameboard.board0[0] = button.textContent;
             }
@@ -138,11 +186,12 @@ const Win = (() => {
     let buttons = document.querySelectorAll('.content');
     buttons.forEach(button => {
         button.addEventListener('click', function () {
+
             let arr0 = Object.values(Gameboard.board0);
             let arr1 = Object.values(Gameboard.board1);
             let arr2 = Object.values(Gameboard.board2);
             let testing = x => x == 'X' || x == 'O';
-            console.log(arr0.every(testing), arr1.every(testing), arr2.every(testing));
+
             for (let i = 0; i < 3; i++) {
                 if (Gameboard['board' + i][0] === Gameboard['board' + i][1] &&
                     Gameboard['board' + i][0] === Gameboard['board' + i][2] &&
@@ -178,6 +227,7 @@ const Win = (() => {
     })
 })();
 
+//inputs for players to enter their names
 const names = (() => {
     let playerX = document.querySelector('#name-X');
     playerX.addEventListener('click', function () {
@@ -192,7 +242,7 @@ const names = (() => {
         head2.textContent = nameO;
     })
 })();
-
+//reset button
 const Reset = (() => {
     let redo = document.querySelector('#reset');
     redo.addEventListener('click', function () {
