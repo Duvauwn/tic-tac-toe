@@ -77,39 +77,41 @@ const Player = () => {
         let boxes = document.querySelectorAll('.content');
         if (Computer.compPlay == true) {
             boxes.forEach((button) => {
+                const Run = () => {
+                    move = 'O';
+                    console.log(u);
+
+                    let ones = Computer.compTurn();
+                    let twos = Computer.compTurn();
+
+                    let choice0 = document.querySelector('#grid' + ones);
+                    let choice1 = choice0.children[twos];
+
+
+                    if (choice1.textContent == '') {
+                        choice1.textContent = move;
+                        Gameboard['board' + ones][twos] = choice0.children[twos].textContent;
+                    }
+                    else if (choice1.textContent != '') {
+                        Run()
+                        console.log('fail');
+                    }
+                    choice1.disabled = true;
+                    choice1.setAttribute('id', 'clicked');
+                    u++
+
+                    return move;
+                };
 
                 if (u % 2 == 0) {
                     move = 'X';
                     console.log(u);
                     return move;
                 }
-                const Run = () => {
-                    if (u % 2 != 0) {
-                        move = 'O';
-                        console.log(u);
+                else if (u % 2 != 0) {
+                    Run()
+                }
 
-                        let ones = Computer.compTurn();
-                        let twos = Computer.compTurn();
-
-                        let choice0 = document.querySelector('#grid' + ones);
-                        let choice1 = choice0.children[twos];
-
-
-                        if (choice1.textContent == '') {
-                            choice1.textContent = move;
-                            Gameboard['board' + ones][twos] = choice0.children[twos].textContent;
-                        }
-                        else if (choice1.textContent != '') {
-                            Run()
-                            console.log('fail');
-                        }
-                        choice1.disabled = true;
-                        choice1.setAttribute('id', 'clicked');
-
-                        return move;
-                    };
-                };
-                Run();
 
             });
 
